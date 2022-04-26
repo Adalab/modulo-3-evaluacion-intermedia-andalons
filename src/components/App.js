@@ -10,12 +10,9 @@ function App() {
     character: '',
   });
   const [filterQuoteData, setFilterQuoteData] = useState('');
+  const [filterCharacterData, setFilterCharacterData] = useState('Todos');
 
   //funciones manejadoras
-  const handleFilterQuote = (ev) => {
-    setFilterQuoteData(ev.target.value);
-  };
-
   const handleNewData = (ev) => {
     const objectProp = ev.target.name;
     const objectValue = ev.target.value;
@@ -27,12 +24,28 @@ function App() {
     setInitialData([...initialData, newData]);
   };
 
+  const handleFilterQuote = (ev) => {
+    setFilterQuoteData(ev.target.value);
+  };
+
+  const handleFilterCharacter = (ev) => {
+    setFilterCharacterData(ev.target.value);
+  };
+  console.log(filterCharacterData);
+
   //render
   const renderHTML = () => {
     return initialData
       .filter((object) =>
         object.quote.toLowerCase().includes(filterQuoteData.toLowerCase())
       )
+      .filter((object) => {
+        if (filterCharacterData !== 'Todos') {
+          return object.character === filterCharacterData;
+        } else {
+          return initialData;
+        }
+      })
 
       .map((object, i) => (
         <li key={i} className="list__element">
@@ -58,12 +71,18 @@ function App() {
             value={filterQuoteData}
           />
           <label htmlFor="filterCharacter"> Filtrar por personaje</label>
-          <select name="filterCharacter" id="filterCharacter">
-            <option value="all">Todos</option>
-            <option value="ross">Ross</option>
-            <option value="rachel">Rachel</option>
-            <option value="phoebe">Phoebe</option>
-            <option value="chandler">Todos</option>
+          <select
+            name="filterCharacter"
+            id="filterCharacter"
+            onChange={handleFilterCharacter}
+          >
+            <option value="Todos">Todos</option>
+            <option value="Ross">Ross</option>
+            <option value="Rachel">Rachel</option>
+            <option value="Phoebe">Phoebe</option>
+            <option value="Chandler">Chandler</option>
+            <option value="Joey">Joey</option>
+            <option value="Monica">Monica</option>
           </select>
         </form>
       </header>
