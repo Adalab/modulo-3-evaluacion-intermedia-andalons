@@ -9,23 +9,87 @@ function App() {
     quote: '',
     character: '',
   });
+  const [filterQuoteData, setFilterQuoteData] = useState('');
 
   //funciones manejadoras
+  const handleFilterQuote = (ev) => {
+    setFilterQuoteData(ev.target.value);
+  };
+
+  const handleNewData = (ev) => {
+    const objectProp = ev.target.name;
+    const objectValue = ev.target.value;
+    setNewData({ ...newData, [objectProp]: objectValue });
+  };
+
+  const handleClickNewData = (ev) => {
+    ev.preventDefault();
+    setInitialData([...initialData, newData]);
+  };
 
   //render
   const renderHTML = () => {
-    return initialData.map((object, i) => (
-      <li key={i}>
-        <p>{object.quote}</p>
-        <p>{object.character}</p>
-      </li>
-    ));
+    return initialData
+      .filter((object) =>
+        object.quote.toLowerCase().includes(filterQuoteData.toLowerCase())
+      )
+
+      .map((object, i) => (
+        <li key={i} className="list__element">
+          <p>"{object.quote}"</p>
+          <p>
+            <strong>{object.character}</strong>
+          </p>
+        </li>
+      ));
   };
 
   return (
     <div>
-      <h1>Frases de Friends</h1>
-      <ul>{renderHTML()}</ul>
+      <header className="header">
+        <h1 className="header__title">Frases de Friends</h1>
+        <form className="header__form">
+          <label htmlFor="filterPhrase">Filtrar por frase</label>
+          <input
+            type="text"
+            name="filterPhrase"
+            id="filterPhrase"
+            onChange={handleFilterQuote}
+            value={filterQuoteData}
+          />
+          <label htmlFor="filterCharacter"> Filtrar por personaje</label>
+          <select name="filterCharacter" id="filterCharacter">
+            <option value="all">Todos</option>
+            <option value="ross">Ross</option>
+            <option value="rachel">Rachel</option>
+            <option value="phoebe">Phoebe</option>
+            <option value="chandler">Todos</option>
+          </select>
+        </form>
+      </header>
+      <ul className="list">{renderHTML()}</ul>
+      <form>
+        <legend>Añadir una nueva frase</legend>
+        <label htmlFor="addQuote">Frase</label>
+        <input
+          type="text"
+          name="quote"
+          id="addQuote"
+          onChange={handleNewData}
+        />
+        <label htmlFor="addCharacter">Personaje</label>
+        <input
+          type="text"
+          name="character"
+          id="addCharacter"
+          onChange={handleNewData}
+        />
+        <input
+          type="submit"
+          value="Añade tu frase"
+          onClick={handleClickNewData}
+        />
+      </form>
     </div>
   );
 }
