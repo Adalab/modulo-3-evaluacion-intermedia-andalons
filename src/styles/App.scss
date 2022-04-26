@@ -1,5 +1,6 @@
 .header {
-  display: flex;
+  margin: auto;
+  text-align: center;
   justify-content: space-between;
   align-items: center;
 }
@@ -16,4 +17,27 @@
     border-radius: 0.5rem;
     border: 1px solid #ddd;
   }
+}
+
+.form {
+  max-width: 600px;
+  border-bottom: 1.5px solid rgb(133, 185, 133);
+  border-top: 1.5px solid rgb(133, 185, 133);
+  padding: 1rem;
+  margin: auto;
+  &__title {
+    padding: 0;
+    font-size: larger;
+    color: rgb(133, 185, 133);
+    margin-bottom: 0.5rem;
+  }
+}
+
+input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: 1px solid #ddd;
+  margin: 0.5rem 1.75rem 0.5rem 0.2rem;
+  height: 1.75rem;
 }

@@ -31,7 +31,6 @@ function App() {
   const handleFilterCharacter = (ev) => {
     setFilterCharacterData(ev.target.value);
   };
-  console.log(filterCharacterData);
 
   //render
   const renderHTML = () => {
@@ -61,8 +60,9 @@ function App() {
     <div>
       <header className="header">
         <h1 className="header__title">Frases de Friends</h1>
-        <form className="header__form">
-          <label htmlFor="filterPhrase">Filtrar por frase</label>
+        <form className="form">
+          <legend className="form__title">Filtra tu búsqueda:</legend>
+          <label htmlFor="filterPhrase">Filtrar por frase: </label>
           <input
             type="text"
             name="filterPhrase"
@@ -70,7 +70,7 @@ function App() {
             onChange={handleFilterQuote}
             value={filterQuoteData}
           />
-          <label htmlFor="filterCharacter"> Filtrar por personaje</label>
+          <label htmlFor="filterCharacter"> Filtrar por personaje: </label>
           <select
             name="filterCharacter"
             id="filterCharacter"
@@ -87,16 +87,16 @@ function App() {
         </form>
       </header>
       <ul className="list">{renderHTML()}</ul>
-      <form>
-        <legend>Añadir una nueva frase</legend>
-        <label htmlFor="addQuote">Frase</label>
+      <form className="form">
+        <legend className="form__title">Añadir una nueva frase: </legend>
+        <label htmlFor="addQuote">Frase: </label>
         <input
           type="text"
           name="quote"
           id="addQuote"
           onChange={handleNewData}
         />
-        <label htmlFor="addCharacter">Personaje</label>
+        <label htmlFor="addCharacter">Personaje: </label>
         <input
           type="text"
           name="character"
