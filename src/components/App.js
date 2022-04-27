@@ -1,10 +1,18 @@
 import '../styles/App.scss';
-import friendsData from '../data/friendsData.json';
-import { useState } from 'react';
+//import friendsData from '../data/friendsData.json';
+import { useEffect, useState } from 'react';
+import callToApi from '../services/api';
 
 function App() {
-  //constantes de estad
-  const [initialData, setInitialData] = useState(friendsData);
+  //llamada a la api
+  useEffect(() => {
+    callToApi().then((response) => {
+      setInitialData(response);
+    });
+  }, []);
+
+  //constantes de estado
+  const [initialData, setInitialData] = useState([]);
   const [newData, setNewData] = useState({
     quote: '',
     character: '',
