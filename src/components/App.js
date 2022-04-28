@@ -1,7 +1,7 @@
-import '../styles/App.scss';
+import "../styles/App.scss";
 //import friendsData from '../data/friendsData.json';
-import { useEffect, useState } from 'react';
-import callToApi from '../services/api';
+import { useEffect, useState } from "react";
+import callToApi from "../services/api";
 
 function App() {
   //llamada a la api
@@ -14,11 +14,11 @@ function App() {
   //constantes de estado
   const [initialData, setInitialData] = useState([]);
   const [newData, setNewData] = useState({
-    quote: '',
-    character: '',
+    quote: "",
+    character: "",
   });
-  const [filterQuoteData, setFilterQuoteData] = useState('');
-  const [filterCharacterData, setFilterCharacterData] = useState('Todos');
+  const [filterQuoteData, setFilterQuoteData] = useState("");
+  const [filterCharacterData, setFilterCharacterData] = useState("Todos");
 
   //funciones manejadoras
   const handleNewData = (ev) => {
@@ -29,6 +29,11 @@ function App() {
 
   const handleClickNewData = (ev) => {
     ev.preventDefault();
+    setNewData({
+      quote: "",
+      character: "",
+    });
+
     setInitialData([...initialData, newData]);
   };
 
@@ -47,7 +52,7 @@ function App() {
         object.quote.toLowerCase().includes(filterQuoteData.toLowerCase())
       )
       .filter((object) => {
-        if (filterCharacterData !== 'Todos') {
+        if (filterCharacterData !== "Todos") {
           return object.character === filterCharacterData;
         } else {
           return initialData;
@@ -103,6 +108,7 @@ function App() {
           name="quote"
           id="addQuote"
           onChange={handleNewData}
+          value={newData.quote}
         />
         <label htmlFor="addCharacter">Personaje: </label>
         <input
@@ -110,6 +116,7 @@ function App() {
           name="character"
           id="addCharacter"
           onChange={handleNewData}
+          value={newData.character}
         />
         <input
           type="submit"
